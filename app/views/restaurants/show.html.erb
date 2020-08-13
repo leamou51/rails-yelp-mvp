@@ -1,0 +1,57 @@
+<div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
+  <%= link_to "#", class: "navbar-brand" do %>
+    <%= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" %>
+    <% end %>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <%= link_to "Restaurants", restaurants_path, class: "nav-link" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "New", new_restaurant_path, class: "nav-link" %>
+      </li>
+      <li class="nav-item dropdown">
+        <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+          <%= link_to "Restaurants", restaurants_path, class: "dropdown-item" %>
+          <%= link_to "New", new_restaurant_path, class: "dropdown-item" %>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="container">
+  <h1><%= @restaurant.name %></h1>
+  <p><i class="fas fa-map-marker-alt"></i> <%= @restaurant.address %> | <i class="fas fa-phone"></i> <%= @restaurant.phone_number %></p>
+
+  <div class="category-container">
+    <h3><%= @restaurant.category %></h3>
+  </div>
+
+  <div class="add-review-btn-container mt-3 mb-1">
+    <%= link_to 'Add a review', new_restaurant_review_path(@restaurant), role: "button", class: "btn btn-primary" %>
+  </div>
+
+  <%= link_to 'Back', restaurants_path  %>
+
+  <ul class="list-group">
+  <% @restaurant.reviews.each do |review| %>
+    <li class="list-group-item">
+      <% review.rating.times do %>
+      <i class="fas fa-star"></i>
+      <% end %>
+      <% (5 - review.rating).times do %>
+      <i class="far fa-star"></i>
+      <% end %>
+      <p><%= review.content %></p>
+    </li>
+  <% end %>
+
+</div>
